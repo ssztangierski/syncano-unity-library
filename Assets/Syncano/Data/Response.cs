@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Wrapper class for getting response from Syncano.
 /// </summary>
-public class Response : JsonData<Response>
+public class Response<T> : JsonData<T> where T : SyncanoObject<T>, new()
 {
 	/// <summary>
 	/// Everything is ok!
@@ -158,4 +158,11 @@ public class Response : JsonData<Response>
 		/// </summary>
 		public string stdout;
 	}
+
+	public T Data;
+
+	private void CreateData(string json) {
+		Data = FromJson(json);
+	}
+
 }

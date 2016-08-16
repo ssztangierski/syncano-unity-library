@@ -20,6 +20,7 @@ public class JsonData<T>
 
 	public void Populate(string json)
 	{
+		Debug.Log(json);
 		JsonUtility.FromJsonOverwrite(json, this);
 	}
 }

@@ -10,16 +10,13 @@ public class RequestBuilder {
 		this.syncano = Syncano.Instance;
 	}
 
-	public Coroutine Get<T>(string id, Action<T> callback) where T : SyncanoObject<T>, new() {
-		return Send(id, callback);
+	public Coroutine Get<Response>(int id, Action<Response> callback) {
+		return Send(id, callback); 
 	}
 
-	private Coroutine Send<T>(string id, Action<T> callback) where T : SyncanoObject<T>, new() {
-		return HttpClient.Instance.GetAsync<T>(id, callback);
+	private Coroutine Send<Response>(int id, Action<Response> callback) {
+		return HttpClient.Instance.GetAsync(id, callback);
 	}
-
-
-
 
 
 }
