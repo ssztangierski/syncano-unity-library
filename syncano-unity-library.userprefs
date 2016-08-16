@@ -1,0 +1,20 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Syncano\Client\HttpClient.cs">
+    <Files>
+      <File FileName="Assets\Syncano\Syncano.cs" Line="104" Column="5" />
+      <File FileName="Assets\Syncano\Client\HttpClient.cs" Line="45" Column="75" />
+      <File FileName="Assets\Syncano\Request\RequestBuilder.cs" Line="18" Column="34" />
+      <File FileName="Assets\Test.cs" Line="22" Column="1" />
+      <File FileName="Assets\Syncano\Data\Response.cs" Line="143" Column="51" />
+      <File FileName="Assets\Questions.cs" Line="4" Column="1" />
+      <File FileName="Assets\Syncano\SyncanoObject.cs" Line="5" Column="1" />
+      <File FileName="Assets\Syncano\Data\JsonData.cs" Line="23" Column="1" />
+      <File FileName="Assets\Syncano\Constants.cs" Line="11" Column="45" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

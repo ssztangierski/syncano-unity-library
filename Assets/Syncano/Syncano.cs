@@ -9,7 +9,6 @@ using UnityEngine.Networking;
 /// </summary>
 public class Syncano : SelfInstantiatingSingleton<Syncano>
 {
-	private const string BASE_URL = "https://api.syncano.io/v1.1/instances/{0}/";
 
 	/// <summary>
 	/// The name of the instance.
@@ -20,11 +19,6 @@ public class Syncano : SelfInstantiatingSingleton<Syncano>
 	/// The API key.
 	/// </summary>
 	public string ApiKey { get; private set; }
-
-	/// <summary>
-	/// The base URL variable.
-	/// </summary>
-	private string baseUrl;
 
 	/// <summary>
 	/// This flag checks if Syncano client was initialized.
@@ -41,8 +35,24 @@ public class Syncano : SelfInstantiatingSingleton<Syncano>
 		isInitialized = true;
 		InstanceName = instanceName;
 		ApiKey = apiKey;
-		baseUrl = string.Format(BASE_URL, InstanceName);
 	}
+
+	public RequestBuilder Please()
+	{
+		return new RequestBuilder();
+	}
+
+
+
+
+
+
+
+
+
+	/*
+
+
 
 	/// <summary>
 	/// Calls the script endpoint.
@@ -91,5 +101,5 @@ public class Syncano : SelfInstantiatingSingleton<Syncano>
 	public Coroutine CallScriptEndpointAsync(string endpointId, string scriptName, System.Action<Response> callback)
 	{
 		return StartCoroutine(CallScriptEndpoint(endpointId, scriptName, callback));
-	}
+	}*/
 }
