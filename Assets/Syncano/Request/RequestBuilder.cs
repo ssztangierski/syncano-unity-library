@@ -10,13 +10,14 @@ public class RequestBuilder {
 		this.syncano = Syncano.Instance;
 	}
 
-	public Coroutine Get<Response>(int id, Action<Response> callback) {
-		return Send(id, callback); 
+	public Coroutine Get<Response>(int id, Action<Response> onSuccess, Action<Response> onFailure = null) {
+		return Send(id, onSuccess, onFailure); 
 	}
 
-	private Coroutine Send<Response>(int id, Action<Response> callback) {
-		return HttpClient.Instance.GetAsync(id, callback);
+	private Coroutine Send<Response>(int id, Action<Response> onSuccess, Action<Response> onFailure = null) {
+		return HttpClient.Instance.GetAsync(id, onSuccess, onFailure);
 	}
+
 
 
 }

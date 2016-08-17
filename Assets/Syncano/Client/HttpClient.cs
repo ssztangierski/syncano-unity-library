@@ -12,13 +12,13 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 	/// </summary>
 	private string baseUrl;
 
-	public Coroutine GetAsync<Response>(int id, Action<Response> callback) {
+	public Coroutine GetAsync<Response>(int id, Action<Response> onSuccess, Action<Response> onFailure = null) {
 
-		return StartCoroutine(SendGetOneRequest(id, callback));
+		return StartCoroutine(SendGetOneRequest(id, onSuccess, onFailure));
 	}
 
-	private IEnumerator SendGetOneRequest<Response>(int id, Action<Response> callback) {
-
+	private IEnumerator SendGetOneRequest<Response>(int id, Action<Response> onSuccess, Action<Response> onFailure = null) {
+		
 		Type responseType = typeof(Response);
 		Type genericResponseType = responseType.GetGenericArguments()[0];
 
@@ -29,13 +29,29 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 	
 		WWW www = new WWW(url, new byte[]{0}, headers);
 		yield return www;
-
+		Debug.Log(www.text);
 		Response response = (Response)Activator.CreateInstance(responseType);
 
 		MethodInfo methodInfo = responseType.GetMethod("CreateData", BindingFlags.NonPublic | BindingFlags.Instance);
 		methodInfo.Invoke(response, new object[] { www.text });
 
-		callback(response);
+		onSuccess(response);
+
+		if (string.IsNullOrEmpty (www.error) == false)
+		{
+			if (onFailure != null)
+			{
+				onFailure(response);
+			}
+		}
+
+		else
+		{
+			if (onSuccess != null)
+			{
+				onSuccess(response);
+			}
+		}
 	}
 
 	private string GetRequestOneBuilder(int id, Type classType) {
