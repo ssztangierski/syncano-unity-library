@@ -8,8 +8,6 @@ public class Test : MonoBehaviour {
 	{
 		Syncano s = Syncano.Instance;
 		s.Init("adfee89ec99b7022de16383185b299c29459e1fa", "unity-quiz-app");
-	
-
 
 		// CREATE NEW OBJECT
 		/*
@@ -26,6 +24,13 @@ public class Test : MonoBehaviour {
 		q.text = "modified text";
 		q.answers = new string[] {"d", "e", "f", "g"};
 		Syncano.Instance.Please().Save(q, res);
+		*/
+
+		// DELETE OBJECT
+		/*
+		Questions q = new Questions();
+		q.id = 163;
+		Syncano.Instance.Please().Delete(q, res);
 		*/
 
 		/*

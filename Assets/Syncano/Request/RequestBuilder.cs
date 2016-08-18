@@ -23,7 +23,7 @@ public class RequestBuilder {
 	}
 
 	public Coroutine Delete<T>(T obj, Action<Response<T>> callback) where T :SyncanoObject<T>, new()  {
-		return HttpClient.Instance.PostAsync<T>(obj, callback, UnityEngine.Networking.UnityWebRequest.kHttpVerbPOST);
+		return HttpClient.Instance.PostAsync<T>(obj, callback, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
 	}
 
 	private Coroutine Send<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null)  where T :SyncanoObject<T> , new(){
