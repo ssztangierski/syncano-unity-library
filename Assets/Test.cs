@@ -38,8 +38,9 @@ public class Test : MonoBehaviour {
 
 	//	yield return s.Please().CallScriptEndpoint<Questions> ("d019a1036c7ec1348713de2770385b728f050ed1", "get_questions", null);
 
+		yield return s.Please().CallScriptEndpoint("6349c3ec1208c0be5ade53b154427d4eb5cb1628", "get_question_to_moderate", endPoint);
 
-		yield return s.Please().CallScriptEndpoint("d019a1036c7ec1348713de2770385b728f050ed1", "_get_questions", endPoint);
+
 
 		yield return null;
 	}
@@ -53,11 +54,13 @@ public class Test : MonoBehaviour {
 */
 	private void endPoint(ScriptEndpoint endpoint)
 	{
-		Debug.Log(endpoint.stdout);
+		Question q = Question.FromJson(endpoint.stdout);
+		Debug.Log(q.answers[0]);
 	}
 
-	private void onSuccess (Response<Questions> res)
+	private void onSuccess (Response<Question> res)
 	{
+		
 		Debug.Log(res.Data.text);
 	}
 

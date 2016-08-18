@@ -15,7 +15,7 @@ public class RequestBuilder {
 		return Send<T>(id, onSuccess, onFailure); 
 	}
 
-	public Coroutine Get<T>(Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new() {
+	public Coroutine Get<T>(Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T : SyncanoObject<T>, new() {
 		return HttpClient.Instance.PostAsync<T>(default(T), onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbGET);
 	}
 

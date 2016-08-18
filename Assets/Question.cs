@@ -2,7 +2,7 @@
 using System.Collections;
 
 
-public class Questions : SyncanoObject<Questions> {
+public class Question : SyncanoObject<Question> {
 
 	public string text;
 
