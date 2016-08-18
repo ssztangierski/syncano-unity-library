@@ -116,11 +116,6 @@ public class Response<T> : JsonData<T> where T : SyncanoObject<T>, new()
 	public int duration;
 
 	/// <summary>
-	/// The serialized result.
-	/// </summary>
-	public Result result;
-
-	/// <summary>
 	/// The web response code.
 	/// </summary>
 	[System.NonSerialized]
@@ -133,16 +128,6 @@ public class Response<T> : JsonData<T> where T : SyncanoObject<T>, new()
 	public string webError;
 
 	/// <summary>
-	/// Shortcut for error message.
-	/// </summary>
-	public string stderr { get { return result.stderr; } }
-
-	/// <summary>
-	/// Shortcut for serialized Output in JSON.
-	/// </summary>
-	public string stdout { get { return result.stdout; } }
-
-	/// <summary>
 	/// Gets or sets a value indicating whether request to Syncano was successful or not.
 	/// </summary>
 	/// <value><c>true</c> if is success; otherwise, <c>false</c>.</value>
@@ -152,29 +137,4 @@ public class Response<T> : JsonData<T> where T : SyncanoObject<T>, new()
 	/// Deserialized data.
 	/// </summary>
 	public T Data { set; get; }
-
-	/// <summary>
-	/// Class for holding error and output string.
-	/// </summary>
-	[System.Serializable]
-	public class Result
-	{
-		/// <summary>
-		/// Error message.
-		/// </summary>
-		public string stderr;
-
-		/// <summary>
-		/// Serialized Output in JSON.
-		/// </summary>
-		public string stdout;
-	}
-
-	/// <summary>
-	/// Private method for setting data through reflection.
-	/// </summary>
-	/// <param name="json">Json.</param>
-	private void SetData(string json) {
-		Data = FromJson(json);
-	}
 }

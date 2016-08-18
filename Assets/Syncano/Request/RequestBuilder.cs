@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RequestBuilder {
 	
@@ -24,6 +25,10 @@ public class RequestBuilder {
 
 	public Coroutine Delete<T>(T obj, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new()  {
 		return HttpClient.Instance.PostAsync<T>(obj, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
+	}
+
+	public Coroutine CallScriptEndpoint<T>(string endpointId, string scriptName, System.Action<T> callback){ // where T : List<SyncanoObject<T>>, new() {
+		return HttpClient.Instance.CallScriptEndpoint(endpointId, scriptName, callback);
 	}
 
 	private Coroutine Send<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null)  where T :SyncanoObject<T> ,new(){

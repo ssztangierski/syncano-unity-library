@@ -48,6 +48,7 @@
      <Compile Include="Assets\Questions.cs" />
      <Compile Include="Assets\Syncano\Client\HttpClient.cs" />
      <Compile Include="Assets\Syncano\Constants.cs" />
+     <Compile Include="Assets\Syncano\Data\GetResponseList.cs" />
      <Compile Include="Assets\Syncano\Data\JsonData.cs" />
      <Compile Include="Assets\Syncano\Data\JsonHelper.cs" />
      <Compile Include="Assets\Syncano\Data\Response.cs" />

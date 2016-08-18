@@ -75,13 +75,15 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 		{
 			if(onSuccess != null)
 			{
-				response.Data = Response<T>.FromJson(www.downloadHandler.text);
+				response.Data = T.FromJson(www.downloadHandler.text);
+				//response.Data = Response<T>.FromJson(www.downloadHandler.text).Data;
+				Debug.Log(www.downloadHandler.text);
 				onSuccess(response);
 			}
 		}
 	}
 
-	private IEnumerator SendGetOneRequest<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new(){
+	private IEnumerator SendGetOneRequest<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new() {
 
 		string url = UrlBuilder(id.ToString(), typeof(T));
 
@@ -92,7 +94,7 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 		yield return www;
 
 		Response<T> response = new Response<T>();
-		response.Data = Response<T>.FromJson(www.text);
+		//response.Data = Response<T>.FromJson(www.text);
 
 		if (string.IsNullOrEmpty (www.error) == false)
 		{
@@ -113,6 +115,46 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 				onSuccess(response);
 			}
 		}
+	}
+
+
+	public Coroutine CallScriptEndpoint<T> (string endpointId, string scriptName, System.Action<T> callback) { //where T : List<SyncanoObject<T>>, new() {
+		return StartCoroutine(CallScriptEndpoint(endpointId, scriptName, callback, ""));
+	}
+
+	private  IEnumerator CallScriptEndpoint<T> (string endpointId, string scriptName, System.Action<T> callback, string optionalParameters) { //where T : List<SyncanoObject<T>>, new() {
+
+		/*
+		StringBuilder sb = new StringBuilder(baseUrl);
+
+		sb.Append("endpoints/scripts/p/");
+		sb.Append(endpointId);
+		sb.Append("/");
+		sb.Append(scriptName);
+		sb.Append("/");*/
+
+
+
+		UnityWebRequest webRequest = UnityWebRequest.Get("https://api.syncano.io/v1.1/instances/unity-quiz-app/endpoints/scripts/p/d019a1036c7ec1348713de2770385b728f050ed1/get_questions/"); //UnityWebRequest.Get(sb.ToString());
+
+		yield return webRequest.Send();
+
+	
+
+		GetResponseList response = new GetResponseList();
+
+		response.Populate(webRequest.downloadHandler.text);
+
+		Debug.Log (response.duration);
+		Debug.Log (response.status);
+
+
+		Debug.Log (webRequest.downloadHandler.text);
+
+
+
+		Debug.Log(response.result.stdout);
+	
 	}
 
 	private string UrlBuilder(string id, Type classType) {

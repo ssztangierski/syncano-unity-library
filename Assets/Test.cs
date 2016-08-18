@@ -18,13 +18,13 @@ public class Test : MonoBehaviour {
 		*/
 
 		// MODIFY TEXT
-		/*
+
 		Questions q = new Questions();
-		q.id = 163;
+		q.id = 178;
 		q.text = "modified text";
 		q.answers = new string[] {"d", "e", "f", "g"};
-		Syncano.Instance.Please().Save(q, res);
-		*/
+		Syncano.Instance.Please().Save(q, onSuccess, onFailure);
+
 
 		// DELETE OBJECT
 		/*
@@ -33,29 +33,32 @@ public class Test : MonoBehaviour {
 		Syncano.Instance.Please().Delete(q, res);
 		*/
 
-
 		// GET ONE QUESTION
-		//yield return s.Please().Get<Questions>(161, res);
+		yield return s.Please().Get(179, onSuccess);
+
+	//	yield return s.Please().CallScriptEndpoint<Questions> ("d019a1036c7ec1348713de2770385b728f050ed1", "get_questions", null);
 
 
 		yield return null;
 	}
 
+	/*
+
+	private void resList (GetResponseList<Questions> res)
+	{
+		//Debug.Log(res.Data.Count);
+	}
+*/
 
 
-	private void res (Response<Questions> res)
+	private void onSuccess (Response<Questions> res)
 	{
 		Debug.Log(res.Data.text);
 	}
 
-	private void test (Questions callback)
+	private void onFailure (SyncanoError res)
 	{
-		
-	}
-
-	private void testList(List<Questions> questions)
-	{
-		Debug.Log(questions);
+		Debug.Log(res.Data.text);
 	}
 
 
