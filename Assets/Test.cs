@@ -18,14 +18,14 @@ public class Test : MonoBehaviour {
 		*/
 
 		// MODIFY TEXT
-
+		/*
 		Questions q = new Questions();
 		q.id = 178;
 		q.text = "modified text";
 		q.answers = new string[] {"d", "e", "f", "g"};
 		Syncano.Instance.Please().Save(q, onSuccess, onFailure);
 
-
+		*/
 		// DELETE OBJECT
 		/*
 		Questions q = new Questions();
@@ -34,10 +34,12 @@ public class Test : MonoBehaviour {
 		*/
 
 		// GET ONE QUESTION
-		yield return s.Please().Get(179, onSuccess);
+	//	yield return s.Please().Get(179, onSuccess);
 
 	//	yield return s.Please().CallScriptEndpoint<Questions> ("d019a1036c7ec1348713de2770385b728f050ed1", "get_questions", null);
 
+
+		yield return s.Please().CallScriptEndpoint("d019a1036c7ec1348713de2770385b728f050ed1", "_get_questions", endPoint);
 
 		yield return null;
 	}
@@ -49,17 +51,16 @@ public class Test : MonoBehaviour {
 		//Debug.Log(res.Data.Count);
 	}
 */
-
+	private void endPoint(ScriptEndpoint endpoint)
+	{
+		Debug.Log(endpoint.stdout);
+	}
 
 	private void onSuccess (Response<Questions> res)
 	{
 		Debug.Log(res.Data.text);
 	}
 
-	private void onFailure (SyncanoError res)
-	{
-		Debug.Log(res.Data.text);
-	}
 
 
 }

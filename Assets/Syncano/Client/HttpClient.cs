@@ -75,9 +75,7 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 		{
 			if(onSuccess != null)
 			{
-				response.Data = T.FromJson(www.downloadHandler.text);
-				//response.Data = Response<T>.FromJson(www.downloadHandler.text).Data;
-				Debug.Log(www.downloadHandler.text);
+				response.Data = Response<T>.FromJson(www.downloadHandler.text);
 				onSuccess(response);
 			}
 		}
@@ -94,7 +92,7 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 		yield return www;
 
 		Response<T> response = new Response<T>();
-		//response.Data = Response<T>.FromJson(www.text);
+		response.Data = Response<T>.FromJson(www.text);
 
 		if (string.IsNullOrEmpty (www.error) == false)
 		{
@@ -118,43 +116,27 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 	}
 
 
-	public Coroutine CallScriptEndpoint<T> (string endpointId, string scriptName, System.Action<T> callback) { //where T : List<SyncanoObject<T>>, new() {
+	public Coroutine CallScriptEndpoint (string endpointId, string scriptName, System.Action<ScriptEndpoint> callback) { //where T : List<SyncanoObject<T>>, new() {
 		return StartCoroutine(CallScriptEndpoint(endpointId, scriptName, callback, ""));
 	}
 
-	private  IEnumerator CallScriptEndpoint<T> (string endpointId, string scriptName, System.Action<T> callback, string optionalParameters) { //where T : List<SyncanoObject<T>>, new() {
+	private  IEnumerator CallScriptEndpoint (string endpointId, string scriptName, System.Action<ScriptEndpoint> callback, string optionalParameters) { //where T : List<SyncanoObject<T>>, new() {
 
-		/*
-		StringBuilder sb = new StringBuilder(baseUrl);
+		StringBuilder sb = new StringBuilder(string.Format("https://api.syncano.io/v1.1/instances/{0}/", Syncano.Instance.InstanceName)); // TODO
 
 		sb.Append("endpoints/scripts/p/");
 		sb.Append(endpointId);
 		sb.Append("/");
 		sb.Append(scriptName);
-		sb.Append("/");*/
+		sb.Append("/");
 
-
-
-		UnityWebRequest webRequest = UnityWebRequest.Get("https://api.syncano.io/v1.1/instances/unity-quiz-app/endpoints/scripts/p/d019a1036c7ec1348713de2770385b728f050ed1/get_questions/"); //UnityWebRequest.Get(sb.ToString());
+		UnityWebRequest webRequest = UnityWebRequest.Get(sb.ToString());
 
 		yield return webRequest.Send();
 
-	
+		ScriptEndpoint response = ScriptEndpoint.FromJson(webRequest.downloadHandler.text);
 
-		GetResponseList response = new GetResponseList();
-
-		response.Populate(webRequest.downloadHandler.text);
-
-		Debug.Log (response.duration);
-		Debug.Log (response.status);
-
-
-		Debug.Log (webRequest.downloadHandler.text);
-
-
-
-		Debug.Log(response.result.stdout);
-	
+		callback(response);
 	}
 
 	private string UrlBuilder(string id, Type classType) {

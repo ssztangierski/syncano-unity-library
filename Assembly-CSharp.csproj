@@ -53,6 +53,7 @@
      <Compile Include="Assets\Syncano\Data\JsonHelper.cs" />
      <Compile Include="Assets\Syncano\Data\Response.cs" />
      <Compile Include="Assets\Syncano\Data\ResponseGetList.cs" />
+     <Compile Include="Assets\Syncano\Data\ScriptEndpoint.cs" />
      <Compile Include="Assets\Syncano\Request\RequestBuilder.cs" />
      <Compile Include="Assets\Syncano\SelfInstantiatingSingleton.cs" />
      <Compile Include="Assets\Syncano\Syncano.cs" />
