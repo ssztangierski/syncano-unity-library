@@ -143,6 +143,17 @@ public class Response<T> : JsonData<T> where T : SyncanoObject<T>, new()
 	public string stdout { get { return result.stdout; } }
 
 	/// <summary>
+	/// Gets or sets a value indicating whether request to Syncano was successful or not.
+	/// </summary>
+	/// <value><c>true</c> if is success; otherwise, <c>false</c>.</value>
+	public bool IsSuccess { get; set; }
+
+	/// <summary>
+	/// Deserialized data.
+	/// </summary>
+	public T Data { set; get; }
+
+	/// <summary>
 	/// Class for holding error and output string.
 	/// </summary>
 	[System.Serializable]
@@ -159,10 +170,11 @@ public class Response<T> : JsonData<T> where T : SyncanoObject<T>, new()
 		public string stdout;
 	}
 
-	public T Data;
-
-	private void CreateData(string json) {
+	/// <summary>
+	/// Private method for setting data through reflection.
+	/// </summary>
+	/// <param name="json">Json.</param>
+	private void SetData(string json) {
 		Data = FromJson(json);
 	}
-
 }
