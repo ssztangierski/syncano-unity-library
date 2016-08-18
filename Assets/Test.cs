@@ -33,10 +33,10 @@ public class Test : MonoBehaviour {
 		Syncano.Instance.Please().Delete(q, res);
 		*/
 
-		/*
+
 		// GET ONE QUESTION
-		yield return s.Please().Get<Questions>(161, res);
-		*/
+		//yield return s.Please().Get<Questions>(161, res);
+
 
 		yield return null;
 	}

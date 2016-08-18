@@ -10,24 +10,24 @@ public class RequestBuilder {
 		this.syncano = Syncano.Instance;
 	}
 
-	public Coroutine Get<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null)  where T :SyncanoObject<T> , new() {
-		return Send(id, onSuccess, onFailure); 
+	public Coroutine Get<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null)  where T :SyncanoObject<T>, new() {
+		return Send<T>(id, onSuccess, onFailure); 
 	}
 
-	public Coroutine Get<T>(Action<Response<T>> callback) where T :SyncanoObject<T>, new() {
-		return HttpClient.Instance.PostAsync<T>(default(T), callback, UnityEngine.Networking.UnityWebRequest.kHttpVerbGET);
+	public Coroutine Get<T>(Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new() {
+		return HttpClient.Instance.PostAsync<T>(default(T), onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbGET);
 	}
 
 	public Coroutine Save<T>(T obj, Action<Response<T>> callback) where T :SyncanoObject<T>, new()  {
 		return HttpClient.Instance.PostAsync<T>(obj, callback);
 	}
 
-	public Coroutine Delete<T>(T obj, Action<Response<T>> callback) where T :SyncanoObject<T>, new()  {
-		return HttpClient.Instance.PostAsync<T>(obj, callback, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
+	public Coroutine Delete<T>(T obj, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new()  {
+		return HttpClient.Instance.PostAsync<T>(obj, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
 	}
 
-	private Coroutine Send<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null)  where T :SyncanoObject<T> , new(){
-		return HttpClient.Instance.GetAsync(id, onSuccess, onFailure);
+	private Coroutine Send<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null)  where T :SyncanoObject<T> ,new(){
+		return HttpClient.Instance.GetAsync<T>(id, onSuccess, onFailure);
 	}
 
 

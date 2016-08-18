@@ -14,17 +14,17 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 	/// </summary>
 	private string baseUrl;
 
-	public Coroutine GetAsync<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T> , new() {
+	public Coroutine GetAsync<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new() {
 
 		return StartCoroutine(SendGetOneRequest(id, onSuccess, onFailure));
 	}
 
-	public Coroutine PostAsync<T>(T obj, Action<Response<T>> callback, string httpMethodOverride = null) where T :SyncanoObject<T> , new() {
+	public Coroutine PostAsync<T>(T obj,  Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null) where T :SyncanoObject<T> , new() {
 
-		return StartCoroutine(SendPostRequest<T>(obj, callback, httpMethodOverride));
+		return StartCoroutine(SendPostRequest<T>(obj, onSuccess, onFailure, httpMethodOverride));
 	}
 
-	private IEnumerator SendPostRequest<T>(T obj, Action<Response<T>> callback, string httpMethodOverride = null) where T :SyncanoObject<T>, new() {
+	private IEnumerator SendPostRequest<T>(T obj,  Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null) where T :SyncanoObject<T>, new() {
 
 		UTF8Encoding encoding = new System.Text.UTF8Encoding();
 
@@ -57,29 +57,29 @@ public class HttpClient : SelfInstantiatingSingleton<HttpClient> {
 
 		yield return www.Send();
 
-		if(callback != null)
+		Response<T> response = new Response<T>();
+
+		if(www.isError)
 		{
-			/*
-			Type responseType = typeof(Response);
-			Type genericResponseType = typeof(T);
-			Response response = (Response)Activator.CreateInstance(responseType);
+			response.IsSuccess = false;
+			response.webError = www.error;
+			//response.responseCode = GetResponseCode(www); TODO
 
-			MethodInfo methodInfo = responseType.GetMethod("SetData", BindingFlags.NonPublic | BindingFlags.Instance);
-			Debug.Log(response);
-
-			methodInfo.Invoke(response, new object[] {www.downloadHandler.text});
-			*/
-
-			Response<T> res = new Response<T>();
-			res.Data = Response<T>.FromJson(www.downloadHandler.text);
-
-			callback(res);
+			if(onFailure != null)
+			{
+				onFailure(response);
+			}
 		}
 
-		Debug.Log(www.downloadHandler.text);
+		else
+		{
+			if(onSuccess != null)
+			{
+				response.Data = Response<T>.FromJson(www.downloadHandler.text);
+				onSuccess(response);
+			}
+		}
 	}
-
-
 
 	private IEnumerator SendGetOneRequest<T>(long id, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new(){
 
