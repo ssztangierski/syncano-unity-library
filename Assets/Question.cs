@@ -8,4 +8,6 @@ public class Question : SyncanoObject<Question> {
 
 	public string[] answers;
 
+	public bool isModerated;
+
 }
