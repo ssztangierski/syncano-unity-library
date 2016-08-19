@@ -36,7 +36,7 @@ public class Test : MonoBehaviour {
 		*/
 
 		// GET ONE QUESTION
-		//yield return s.Please().Get<Question>(227, onSuccess);
+		yield return s.Please().Get<Question>(666, onSuccess, onFailure);
 
 	//	yield return s.Please().CallScriptEndpoint<Questions> ("d019a1036c7ec1348713de2770385b728f050ed1", "get_questions", null);
 
@@ -67,7 +67,7 @@ public class Test : MonoBehaviour {
 
 	private void onFailure (Response<Question> res)
 	{
-		Debug.Log(res.Data.text);
+		Debug.Log(res.syncanoError);
 	}
 
 }
