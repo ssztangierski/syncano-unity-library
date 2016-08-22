@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Question.cs" />
-     <Compile Include="Assets\Syncano\Client\HttpClient.cs" />
+     <Compile Include="Assets\Syncano\Client\SyncanoHttpClient.cs" />
      <Compile Include="Assets\Syncano\Constants.cs" />
      <Compile Include="Assets\Syncano\Data\JsonData.cs" />
      <Compile Include="Assets\Syncano\Data\Response.cs" />

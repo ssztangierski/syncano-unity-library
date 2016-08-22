@@ -7,7 +7,7 @@ using Syncano.Request;
 
 namespace Syncano {
 	/// <summary>
-	/// Client of Syncano using connection over UnityWebRequest. Provides functionality of sending end geting http request to and from Syncano.
+	/// Create Syncano object. When using this constructor most functions will not work, because api key and instance name are usually required.
 	/// </summary>
 	public class SyncanoClient : SelfInstantiatingSingleton<SyncanoClient> {
 	/// <summary>
@@ -38,7 +38,10 @@ namespace Syncano {
 
 		return this;
 	}
-
+	
+	/// <summary>
+	/// Returns builder object that makes it easy to configure a request in one line.
+	/// </summary>
 	public RequestBuilder Please()
 	{	
 		if(isInitialized == false)
