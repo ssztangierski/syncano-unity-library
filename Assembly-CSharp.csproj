@@ -55,6 +55,7 @@
      <Compile Include="Assets\Syncano\Data\ResponseGetList.cs" />
      <Compile Include="Assets\Syncano\Data\ScriptEndpoint.cs" />
      <Compile Include="Assets\Syncano\Request\RequestBuilder.cs" />
+     <Compile Include="Assets\Syncano\Request\SyncanoWebRequest.cs" />
      <Compile Include="Assets\Syncano\SelfInstantiatingSingleton.cs" />
      <Compile Include="Assets\Syncano\Syncano.cs" />
      <Compile Include="Assets\Syncano\SyncanoException.cs" />

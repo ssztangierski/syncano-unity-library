@@ -36,9 +36,8 @@ public class Test : MonoBehaviour {
 		*/
 
 		// GET ONE QUESTION
-		yield return s.Please().Get<Question>(666, onSuccess, onFailure);
+		yield return s.Please().Get<Question>(235, onSuccess, onFailure);
 
-	//	yield return s.Please().CallScriptEndpoint<Questions> ("d019a1036c7ec1348713de2770385b728f050ed1", "get_questions", null);
 
 		//yield return s.Please().CallScriptEndpoint("6349c3ec1208c0be5ade53b154427d4eb5cb1628", "get_question_to_moderate", onSuccessScriptEndpoint);
 		yield return null;
@@ -47,7 +46,7 @@ public class Test : MonoBehaviour {
 	private void onSuccessScriptEndpoint (ScriptEndpoint res) {
 
 		Question q = JsonUtility.FromJson<Question>(res.result.stdout);// Question.FromJson(res.result.stdout);
-		Debug.Log(res.result.stdout);
+	
 		Debug.Log(" q to moderate id= " + q.id + " ;length" + q.answers.Length);
 	}
 
@@ -67,7 +66,11 @@ public class Test : MonoBehaviour {
 
 	private void onFailure (Response<Question> res)
 	{
-		Debug.Log(res.syncanoError);
+		if(res.IsSyncanoError)
+			Debug.Log(res.syncanoError);
+		else
+			Debug.Log(res.webError);
+			
 	}
 
 }
