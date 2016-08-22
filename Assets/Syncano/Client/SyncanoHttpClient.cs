@@ -191,7 +191,10 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 		{
 			if(onSuccess != null)
 			{
-				response.Data = SyncanoObject<T>.FromJson(www.downloadHandler.text);
+				if(www.method.Equals(UnityWebRequest.kHttpVerbDELETE) == false)
+				{
+						response.Data = SyncanoObject<T>.FromJson(www.downloadHandler.text);
+				}
 				onSuccess(response);
 			}
 		}
