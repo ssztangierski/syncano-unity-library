@@ -48,17 +48,13 @@
      <Compile Include="Assets\Question.cs" />
      <Compile Include="Assets\Syncano\Client\HttpClient.cs" />
      <Compile Include="Assets\Syncano\Constants.cs" />
-     <Compile Include="Assets\Syncano\Data\GetResponseList.cs" />
      <Compile Include="Assets\Syncano\Data\JsonData.cs" />
-     <Compile Include="Assets\Syncano\Data\JsonHelper.cs" />
      <Compile Include="Assets\Syncano\Data\Response.cs" />
-     <Compile Include="Assets\Syncano\Data\ResponseGetList.cs" />
      <Compile Include="Assets\Syncano\Data\ScriptEndpoint.cs" />
      <Compile Include="Assets\Syncano\Request\RequestBuilder.cs" />
      <Compile Include="Assets\Syncano\Request\SyncanoWebRequest.cs" />
      <Compile Include="Assets\Syncano\SelfInstantiatingSingleton.cs" />
      <Compile Include="Assets\Syncano\Syncano.cs" />
-     <Compile Include="Assets\Syncano\SyncanoException.cs" />
      <Compile Include="Assets\Syncano\SyncanoObject.cs" />
      <Compile Include="Assets\Test.cs" />
  <Reference Include="UnityEngine.UI">

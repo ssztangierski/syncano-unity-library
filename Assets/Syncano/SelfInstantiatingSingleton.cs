@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Syncano {
 /// <summary>
 /// Be aware this will not prevent a non singleton constructor
 ///   such as `T myT = new T();`
@@ -73,4 +74,5 @@ public class SelfInstantiatingSingleton<T> : MonoBehaviour where T : MonoBehavio
     {
         applicationIsQuitting = true;
     }
+}
 }
