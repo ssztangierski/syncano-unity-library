@@ -40,7 +40,12 @@ namespace Syncano {
 	}
 
 	public RequestBuilder Please()
-	{
+	{	
+		if(isInitialized == false)
+		{
+			Debug.LogError("Syncano has not been initialized. Please call Init before making any requests.");
+			return null;
+		}
 		return new RequestBuilder();
 	}
 }
