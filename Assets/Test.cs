@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Syncano;
+using Syncano.Data;
 
 public class Test : MonoBehaviour {
 
 	IEnumerator Start()
 	{
-		Syncano s = Syncano.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "unity-quiz-app");
+		SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "unity-quiz-app");
 
 		// CREATE NEW OBJECT
 		/*
