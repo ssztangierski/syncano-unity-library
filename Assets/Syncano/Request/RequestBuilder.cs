@@ -23,6 +23,39 @@ public class RequestBuilder {
 	}
 	
 	/// <summary>
+	/// Get the specified getData, onSuccess and onFailure.
+	/// </summary>
+	/// <param name="getData">Get data.</param>
+	/// <param name="onSuccess">On success.</param>
+	/// <param name="onFailure">On failure.</param>
+	/// <typeparam name="T">The 1st type parameter.</typeparam>
+	public Coroutine Get<T>(string channelName, Dictionary<string, string> getData, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T : SyncanoObject<T>, new() {
+		return SyncanoHttpClient.Instance.GetAsync<T>(channelName, getData, onSuccess, onFailure);
+	}
+
+	/// <summary>
+	/// Sends a POST request to Syncano with parameters.
+	/// </summary>
+	/// <param name="id">Identifier.</param>
+	/// <param name="onSuccess">On success.</param>
+	/// <param name="onFailure">On failure.</param>
+	/// <typeparam name="T">The 1st type parameter.</typeparam>
+	public Coroutine POST<T>(Dictionary<string, string> postData, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T : SyncanoObject<T>, new() {
+		return SyncanoHttpClient.Instance.PostAsync<T>(postData, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbPOST);
+	}
+	
+	/// <summary>
+	/// Creates the channel.
+	/// </summary>
+	/// <returns>The channel.</returns>
+	/// <param name="channel">Channel.</param>
+	/// <param name="onSuccess">On success.</param>
+	/// <param name="onFailure">On failure.</param>
+	public Coroutine CreateChannel(Channel channel, Action<Response<Channel>> onSuccess, Action<Response<Channel>> onFailure = null) {
+		return SyncanoHttpClient.Instance.PostAsync<Channel>(channel, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbPOST);
+	}
+
+	/// <summary>
 	/// Save the specified obj, onSuccess and onFailure. Sends a Get request for an object with specified id. Takes two callbacks, one when request is successful which is mandatory and second on failure which is optional for error handling.
 	/// </summary>
 	/// <param name="obj">Object.</param>
@@ -43,7 +76,7 @@ public class RequestBuilder {
 	public Coroutine Delete<T>(T obj, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T :SyncanoObject<T>, new()  {
 		return SyncanoHttpClient.Instance.PostAsync<T>(obj, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
 	}
-	
+
 	/// <summary>
 	/// Calls the script endpoint.
 	/// </summary>

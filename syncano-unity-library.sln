@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{CBE47294-850A-DEE9-892D-A0F85A18DFC5}") = "syncano-unity-library", "Assembly-CSharp.csproj", "{B6D2BDDF-097A-FB5B-8766-96917E617BBA}"
 EndProject
+Project("{CBE47294-850A-DEE9-892D-A0F85A18DFC5}") = "syncano-unity-library", "Assembly-CSharp-Editor.csproj", "{39B2D0FB-765D-CF49-F427-4B54D31A68A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{B6D2BDDF-097A-FB5B-8766-96917E617BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D2BDDF-097A-FB5B-8766-96917E617BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D2BDDF-097A-FB5B-8766-96917E617BBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39B2D0FB-765D-CF49-F427-4B54D31A68A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39B2D0FB-765D-CF49-F427-4B54D31A68A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39B2D0FB-765D-CF49-F427-4B54D31A68A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39B2D0FB-765D-CF49-F427-4B54D31A68A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -115,7 +115,7 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 	public const int CODE_UNKNOWN_ERROR = 6;
 	
 	/// <summary>
-		/// This method starts coroutine for SendRequest and returns it, so it cal be yielded or run asynchronously.
+	/// This method starts coroutine for SendRequest and returns it, so it cal be yielded or run asynchronously.
 	/// </summary>
 	/// <returns>The async.</returns>
 	/// <param name="obj">Object.</param>
@@ -147,6 +147,28 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 
 		return StartCoroutine(SendRequest(url, string.Empty, onSuccess, onFailure, httpMethodOverride));
 	}
+
+	public Coroutine PostAsync<T>(Dictionary<string, string> postData, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null) where T : SyncanoObject<T>, new() {
+
+		string url = UrlBuilder(string.Empty, typeof(T));
+
+		return StartCoroutine(SendRequest(url, string.Empty, onSuccess, onFailure, httpMethodOverride));
+	}
+
+	public Coroutine GetAsync<T>(string channelName, Dictionary<string, string> getData, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null) where T : SyncanoObject<T>, new() {
+
+		string url = UrlBuilder(channelName, typeof(T), getData);
+		
+		return StartCoroutine(SendRequest(url, string.Empty, onSuccess, onFailure, UnityWebRequest.kHttpVerbGET));
+	}
+
+	/* public Coroutine PostAsync<T>(Action<ResponseGetList<T>> onSuccess, Action<ResponseGetList<T>> onFailure = null, string httpMethodOverride = null) where T : SyncanoObject<T>, new() {
+		string url = UrlBuilder(null, typeof(T));
+		return StartCoroutine(SendRequest<T>(url, string.Empty, onSuccess, onFailure, httpMethodOverride));
+	}
+	private IEnumerator SendRequest<T>(string url, string serializedObject, Action<ResponseGetList<T>> onSuccess, Action<ResponseGetList<T>> onFailure = null, string httpMethodOverride = null) {
+			yield return null;
+	}*/
 	
 	/// <summary>
 	/// Sends the request to Syncano. Used for all methods like Save, Delete, Create etc.
@@ -158,12 +180,12 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 	/// <param name="onFailure">On failure.</param>
 	/// <param name="httpMethodOverride">Http method override.</param>
 	/// <typeparam name="T">The 1st type parameter.</typeparam>
-	private IEnumerator SendRequest<T>(string url, string serializedObject, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null) where T : SyncanoObject<T>, new() {
+	private IEnumerator SendRequest<T>(string url, string serializedObject, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null) {
 
 		UnityWebRequest www = new UnityWebRequest(url);
 		www.SetRequestHeader(Constants.HTTP_HEADER_API_KEY, SyncanoClient.Instance.ApiKey);
 		www.SetRequestHeader("Content-Type", "application/json");
-		UTF8Encoding encoding = new System.Text.UTF8Encoding();
+		UTF8Encoding encoding = new UTF8Encoding();
 
 		www.downloadHandler = new DownloadHandlerBuffer();
 
@@ -171,7 +193,7 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 
 		if(string.IsNullOrEmpty(serializedObject) == false)
 		{
-			www.uploadHandler = new UploadHandlerRaw (encoding.GetBytes(serializedObject));
+			www.uploadHandler = new UploadHandlerRaw(encoding.GetBytes(serializedObject));
 		}
 
 		yield return www.Send();
@@ -193,7 +215,12 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 			{
 				if(www.method.Equals(UnityWebRequest.kHttpVerbDELETE) == false)
 				{
-						response.Data = SyncanoObject<T>.FromJson(www.downloadHandler.text);
+					JSONObject j = new JSONObject(www.downloadHandler.text);
+	
+
+
+
+					response.Data = SyncanoObject<T>.FromJson(www.downloadHandler.text);
 				}
 				onSuccess(response);
 			}
@@ -256,10 +283,47 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 	/// <returns>The builder.</returns>
 	/// <param name="id">Identifier.</param>
 	/// <param name="classType">Class type.</param>
-	private string UrlBuilder(string id, Type classType) {
+		private string UrlBuilder(string id, Type classType, Dictionary<string, string> getData = null) {
 
+		string ID = string.IsNullOrEmpty(id) == false ? id.ToString() : string.Empty;
 		StringBuilder sb = new StringBuilder(Constants.PRODUCTION_SERVER_URL);
-		sb.Append(string.Format(Constants.OBJECTS_DETAIL_URL, SyncanoClient.Instance.InstanceName, classType.ToString(), id.ToString()));
+
+		if(classType.ToString().ToLower().Equals("channel"))
+		{
+			sb.Append(string.Format(Constants.CHANNELS_LIST_URL, SyncanoClient.Instance.InstanceName));
+		}
+
+		else if(classType.ToString().ToLower().Equals("notification"))
+		{
+			sb.Append(string.Format(Constants.CHANNELS_POLL_URL, SyncanoClient.Instance.InstanceName, id));
+		}
+
+		else
+		{
+			sb.Append(string.Format(Constants.OBJECTS_DETAIL_URL, SyncanoClient.Instance.InstanceName, classType.ToString(), ID));
+		}
+
+		if(getData != null)
+		{
+			sb.Append("?");
+
+			foreach(KeyValuePair<string, string> pair in getData)
+			{
+				if(string.IsNullOrEmpty(pair.Key) == false && string.IsNullOrEmpty(pair.Value) == false)
+				{
+					
+				}
+
+				sb.Append("&");
+			}
+		}
+
+		string url = sb.ToString();
+
+		if(url.EndsWith("&"))
+		{
+			url.Remove(url.Length);
+		}
 
 		return sb.ToString();
 	}
@@ -274,26 +338,26 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 
 		switch(method)
 		{
-		case UnityWebRequest.kHttpVerbGET:
-			if(resultCode == HTTP_CODE_SUCCESS)
-			{
-				return true;
-			}
-			return false;
-		case UnityWebRequest.kHttpVerbPOST:
-			if(resultCode == HTTP_CODE_SUCCESS || resultCode == HTTP_CODE_NO_CONTENT || resultCode == HTTP_CODE_CREATED)
-			{
-				return true;
-			}
-			return false;
-		case UnityWebRequest.kHttpVerbDELETE:
-			if(resultCode == HTTP_CODE_NOT_FOUND || resultCode == HTTP_CODE_NO_CONTENT)
-			{
-				return true;
-			}
-			return false;
-		default:
-			return false;
+			case UnityWebRequest.kHttpVerbGET:
+				if(resultCode == HTTP_CODE_SUCCESS)
+				{
+					return true;
+				}
+				return false;
+			case UnityWebRequest.kHttpVerbPOST:
+				if(resultCode == HTTP_CODE_SUCCESS || resultCode == HTTP_CODE_NO_CONTENT || resultCode == HTTP_CODE_CREATED)
+				{
+					return true;
+				}
+				return false;
+			case UnityWebRequest.kHttpVerbDELETE:
+				if(resultCode == HTTP_CODE_NOT_FOUND || resultCode == HTTP_CODE_NO_CONTENT)
+				{
+					return true;
+				}
+				return false;
+			default:
+				return false;
 		}
 	}
 }
