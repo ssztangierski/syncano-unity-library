@@ -11,4 +11,9 @@ public class ResponseGetList<T> : Response<T> {//where T : List<SyncanoObject<T>
 	public string next;
 
 	public List<T> objects;
+
+	public override void SetData (string json)
+	{
+		JsonUtility.FromJsonOverwrite(json, this);
+	}
 }

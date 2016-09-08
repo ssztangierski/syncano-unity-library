@@ -12,5 +12,10 @@ namespace Syncano.Data {
 	/// Deserialized data.
 	/// </summary>
 	public T Data { set; get; }
+
+		public virtual void SetData(string json)
+		{
+			Data = JsonUtility.FromJson<T>(json);
+		}
 }
 }

@@ -1,16 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Test.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Syncano\Data\JsonHelper.cs">
     <Files>
-      <File FileName="Assets\Test.cs" Line="75" Column="1" />
-      <File FileName="Assets\Syncano\Request\RequestBuilder.cs" Line="53" Column="61" />
-      <File FileName="Assets\Syncano\Client\SyncanoHttpClient.cs" Line="218" Column="47" />
-      <File FileName="Assets\Syncano\Data\ResponseGetList.cs" Line="8" Column="1" />
-      <File FileName="Assets\Syncano\Data\Response.cs" Line="9" Column="40" />
-      <File FileName="Assets\Syncano\Request\SyncanoWebRequest.cs" Line="8" Column="1" />
-      <File FileName="Assets\Syncano\ChannelConnection.cs" Line="189" Column="21" />
-      <File FileName="Assets\Syncano\Data\Notification.cs" Line="34" Column="3" />
-      <File FileName="Assets\Syncano\SyncanoObject.cs" Line="13" Column="30" />
+      <File FileName="Assets\Syncano\Client\SyncanoHttpClient.cs" Line="361" Column="2" />
+      <File FileName="Assets\Test.cs" Line="1" Column="1" />
+      <File FileName="Assets\Syncano\Request\RequestBuilder.cs" Line="87" Column="116" />
+      <File FileName="Assets\Syncano\Data\ResponseGetList.cs" Line="8" Column="44" />
+      <File FileName="Assets\Syncano\Data\Response.cs" Line="1" Column="1" />
+      <File FileName="Assets\Syncano\Request\SyncanoWebRequest.cs" Line="1" Column="1" />
+      <File FileName="Assets\Syncano\ChannelConnection.cs" Line="1" Column="1" />
+      <File FileName="Assets\Syncano\Data\Notification.cs" Line="7" Column="42" />
+      <File FileName="Assets\Syncano\SyncanoObject.cs" Line="13" Column="27" />
+      <File FileName="Assets\Question.cs" Line="6" Column="38" />
+      <File FileName="Assets\Syncano\Data\Channel.cs" Line="7" Column="37" />
+      <File FileName="Assets\Syncano\Data\JsonHelper.cs" Line="11" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

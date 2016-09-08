@@ -29,8 +29,8 @@ namespace Syncano.Request {
 		/// <param name="onSuccess">On success.</param>
 		/// <param name="onFailure">On failure.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public Coroutine Get<T>(Action<T> onSuccess, Action<Response<T>> onFailure = null) where T : ResponseGetList<T>, new() {
-			return null;//return SyncanoHttpClient.Instance.PostAsync<T>(id, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbGET);
+		public Coroutine Get<T>(Action<ResponseGetList<T>> onSuccess, Action<ResponseGetList<T>> onFailure = null) where T : SyncanoObject, new() {
+			return SyncanoHttpClient.Instance.PostAsync<T>(onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbGET);
 		}
 
 		/// <summary>
