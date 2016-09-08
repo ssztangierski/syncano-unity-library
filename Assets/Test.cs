@@ -55,11 +55,6 @@ public class Test : MonoBehaviour {
 
 	private void onError(Response<Notification> response) { Debug.Log("received " + response.ToString()); }
 
-	private void onSuccessListDownloaded(Response<List<Question>> response) {
-
-		Debug.Log("test " + response.Data.Count);
-	}
-
 	private void onSuccessScriptEndpoint (ScriptEndpoint res) {
 
 		Question q = JsonUtility.FromJson<Question>(res.result.stdout);// Question.FromJson(res.result.stdout);

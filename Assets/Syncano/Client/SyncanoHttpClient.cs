@@ -178,7 +178,7 @@ namespace Syncano.Client {
 		/// <param name="onFailure">On failure.</param>
 		/// <param name="httpMethodOverride">Http method override.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		private IEnumerator SendRequest<T>(Response<T> response, string url, string serializedObject, Delegate onSuccess, Delegate onFailure = null, string httpMethodOverride = null) {
+		private IEnumerator SendRequest<T>(Response<T> response, string url, string serializedObject, Delegate onSuccess, Delegate onFailure = null, string httpMethodOverride = null)  where T : SyncanoObject, new() {
 			
 			UnityWebRequest www = PrepareWebRequest(url, serializedObject, httpMethodOverride);
 
@@ -197,7 +197,7 @@ namespace Syncano.Client {
 		/// <param name="method">Method.</param>
 		/// <param name="json">Json.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		private void ProcessResponse<T> (Response<T> response, Delegate onSuccess, Delegate onFailure, string method, string json)
+		private void ProcessResponse<T> (Response<T> response, Delegate onSuccess, Delegate onFailure, string method, string json) where T : SyncanoObject, new()
 		{
 			if(response.IsSuccess == false)
 			{
