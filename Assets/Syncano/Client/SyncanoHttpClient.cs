@@ -180,8 +180,8 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 	/// <param name="onFailure">On failure.</param>
 	/// <param name="httpMethodOverride">Http method override.</param>
 	/// <typeparam name="T">The 1st type parameter.</typeparam>
-	private IEnumerator SendRequest<T>(string url, string serializedObject, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null) {
-
+	private IEnumerator SendRequest<T>(string url, string serializedObject, Action<Response<T>> onSuccess, Action<Response<T>> onFailure = null, string httpMethodOverride = null)  {
+			
 		UnityWebRequest www = new UnityWebRequest(url);
 		www.SetRequestHeader(Constants.HTTP_HEADER_API_KEY, SyncanoClient.Instance.ApiKey);
 		www.SetRequestHeader("Content-Type", "application/json");
@@ -215,11 +215,6 @@ public class SyncanoHttpClient : SelfInstantiatingSingleton<SyncanoHttpClient> {
 			{
 				if(www.method.Equals(UnityWebRequest.kHttpVerbDELETE) == false)
 				{
-					JSONObject j = new JSONObject(www.downloadHandler.text);
-	
-
-
-
 					response.Data = SyncanoObject<T>.FromJson(www.downloadHandler.text);
 				}
 				onSuccess(response);

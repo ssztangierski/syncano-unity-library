@@ -22,5 +22,14 @@ public class SyncanoObject<T> : JsonData<T> {
 	/// </summary>
 	public long id;
 
+	/// <summary>
+	/// The channel.
+	/// </summary>
+	public string channel;
+
+	/// <summary>
+	/// Channel room.
+	/// </summary>
+	public string channelRoom;
 }
 }
