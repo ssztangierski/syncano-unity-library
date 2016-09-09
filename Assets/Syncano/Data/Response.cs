@@ -3,6 +3,7 @@ using System.Collections;
 using Syncano.Request;
 
 namespace Syncano.Data {
+	
 	/// <summary>
 	/// Wrapper class for getting response from Syncano.
 	/// </summary>
