@@ -10,12 +10,12 @@ public class Test : MonoBehaviour {
 	IEnumerator Start()
 	{
 		//SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "syncano-io");
-		SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "millionaire-quiz-app");
+		SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "confetti-io");
 
 		//s.Please().Get<Question>(null);
 
-		yield return s.Please().Get<Question>(onSuccessList, onFailureList);
-		yield return s.Please().Get<Question>(60, onSuccess, onFailure);
+		//yield return s.Please().Get<Question>(onSuccessList, onFailureList);
+		//yield return s.Please().Get<Question>(60, onSuccess, onFailure);
 
 		/*
 		Channel c = new Channel ("test123");
@@ -28,8 +28,13 @@ public class Test : MonoBehaviour {
 		//ChannelConnection channelConnection = new ChannelConnection(this, onNotification, onError);
 		//channelConnection.Start(this, "syncano-io-channel");
 
+		/*
+		Dictionary<string, string> payload= new Dictionary<string, string>();
+		payload.Add("nickname", "test124");
 
 
+		yield return s.Please().CallScriptEndpoint("a6a81f0951ec33026cf1426df598865f35ea9efb", "create_player", onSuccessCreatePlayer, payload);
+		*/
 
 
 		yield return null;
@@ -54,6 +59,12 @@ public class Test : MonoBehaviour {
 	private void onNotification(Response<Notification> response) { Debug.Log("received " + response.Data.payload); }
 
 	private void onError(Response<Notification> response) { Debug.Log("received " + response.ToString()); }
+
+	private void onSuccessCreatePlayer(ScriptEndpoint res)
+	{
+		Debug.Log(res.IsSuccess);
+		Debug.Log(res.result.stdout);
+	}
 
 	private void onSuccessScriptEndpoint (ScriptEndpoint res) {
 

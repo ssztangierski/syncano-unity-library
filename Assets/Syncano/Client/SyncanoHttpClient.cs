@@ -240,8 +240,8 @@ namespace Syncano.Client {
 		/// <param name="endpointId">Endpoint identifier.</param>
 		/// <param name="scriptName">Script name.</param>
 		/// <param name="callback">Callback.</param>
-		public Coroutine CallScriptEndpoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback) {
-			return StartCoroutine(RequestScriptEndPoint(endpointId, scriptName, callback));
+		public Coroutine CallScriptEndpoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
+			return StartCoroutine(RequestScriptEndPoint(endpointId, scriptName, callback, payload));
 		}
 
 		/// <summary>
@@ -251,15 +251,37 @@ namespace Syncano.Client {
 		/// <param name="endpointId">Endpoint identifier.</param>
 		/// <param name="scriptName">Script name.</param>
 		/// <param name="callback">Callback.</param>
-		private IEnumerator RequestScriptEndPoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback) {
+		private IEnumerator RequestScriptEndPoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
 
 			StringBuilder sb = new StringBuilder(string.Format(Constants.SCRIPT_ENDPOINT_URL, SyncanoClient.Instance.InstanceName, endpointId, scriptName));
-			UnityWebRequest www = UnityWebRequest.Get(sb.ToString());
+			//UnityWebRequest www = UnityWebRequest.Get(sb.ToString());
+
+			WWWForm postData = null;
+
+			if(payload != null && payload.Count > 0)
+			{
+				postData = new WWWForm();
+		
+				foreach(KeyValuePair<string, string> pair in payload)
+				{
+					postData.AddField(pair.Key, pair.Value);
+				}
+			}
+
+			UnityWebRequest www = UnityWebRequest.Post(sb.ToString(), postData); //PrepareWebRequest(sb.ToString(), null, UnityWebRequest.kHttpVerbGET);
 
 			yield return www.Send();
 
 			ScriptEndpoint response = JsonUtility.FromJson<ScriptEndpoint>(www.downloadHandler.text);
 			ReadWebRequest(response, www);
+
+			if(response.IsSuccess)
+			{
+				if(string.IsNullOrEmpty(response.stderr) == false)
+				{
+					response.IsSuccess = false;
+				}
+			}	
 
 			callback(response);
 		}
@@ -303,7 +325,7 @@ namespace Syncano.Client {
 			bool isSyncanoError = CheckIfResponseIfSuccessForMethod(www.method, www.responseCode) != true;
 			webRequest.IsSyncanoError = isSyncanoError;
 			webRequest.IsSuccess = !www.isError && isSyncanoError == false;
-
+			 
 			if(isSyncanoError) {
 				webRequest.syncanoError = www.downloadHandler.text;
 			}
