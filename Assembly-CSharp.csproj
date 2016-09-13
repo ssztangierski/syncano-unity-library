@@ -45,16 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\JSON\JSONObject.cs" />
-     <Compile Include="Assets\JSON\JSONTemplates.cs" />
-     <Compile Include="Assets\JSON\VectorTemplates.cs" />
      <Compile Include="Assets\Question.cs" />
      <Compile Include="Assets\Syncano\ChannelConnection.cs" />
      <Compile Include="Assets\Syncano\Client\SyncanoHttpClient.cs" />
      <Compile Include="Assets\Syncano\Constants.cs" />
      <Compile Include="Assets\Syncano\Data\Channel.cs" />
-     <Compile Include="Assets\Syncano\Data\JsonData.cs" />
-     <Compile Include="Assets\Syncano\Data\JsonHelper.cs" />
      <Compile Include="Assets\Syncano\Data\Notification.cs" />
      <Compile Include="Assets\Syncano\Data\Response.cs" />
      <Compile Include="Assets\Syncano\Data\ResponseGetList.cs" />
@@ -67,7 +62,6 @@
      <Compile Include="Assets\Syncano\Syncano.cs" />
      <Compile Include="Assets\Syncano\SyncanoObject.cs" />
      <Compile Include="Assets\Test.cs" />
-     <None Include="Assets\JSON\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
