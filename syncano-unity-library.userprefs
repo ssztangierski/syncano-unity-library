@@ -1,18 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Syncano\Client\SyncanoHttpClient.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Test.cs">
     <Files>
-      <File FileName="Assets\Syncano\Request\RequestBuilder.cs" Line="135" Column="51" />
-      <File FileName="Assets\Syncano\Client\SyncanoHttpClient.cs" Line="270" Column="5" />
-      <File FileName="Assets\Test.cs" Line="33" Column="42" />
-      <File FileName="Assets\Syncano\Data\Response.cs" Line="6" Column="2" />
+      <File FileName="Assets\Syncano\Request\RequestBuilder.cs" Line="134" Column="151" />
+      <File FileName="Assets\Syncano\Client\SyncanoHttpClient.cs" Line="254" Column="3" />
+      <File FileName="Assets\Test.cs" Line="47" Column="40" />
+      <File FileName="Assets\Syncano\Data\Response.cs" Line="1" Column="1" />
       <File FileName="Assets\Syncano\Data\ResponseGetList.cs" Line="1" Column="1" />
       <File FileName="Assets\Syncano\Request\SyncanoWebRequest.cs" Line="1" Column="1" />
-      <File FileName="Assets\Syncano\ChannelConnection.cs" Line="1" Column="1" />
+      <File FileName="Assets\Syncano\ChannelConnection.cs" Line="180" Column="11" />
       <File FileName="Assets\Syncano\Data\Notification.cs" Line="1" Column="1" />
       <File FileName="Assets\Syncano\SyncanoObject.cs" Line="1" Column="1" />
       <File FileName="Assets\Question.cs" Line="1" Column="1" />
-      <File FileName="Assets\Syncano\Data\Channel.cs" Line="1" Column="1" />
+      <File FileName="Assets\Syncano\Data\Channel.cs" Line="36" Column="32" />
       <File FileName="Assets\Syncano\Data\JsonHelper.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

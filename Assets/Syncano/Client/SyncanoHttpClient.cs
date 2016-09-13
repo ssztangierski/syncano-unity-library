@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 using Syncano.Data;
 using Syncano.Request;
+using Newtonsoft.Json;
+using Newtonsoft;
 
 namespace Syncano.Client {
 	/// <summary>
@@ -254,7 +256,6 @@ namespace Syncano.Client {
 		private IEnumerator RequestScriptEndPoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
 
 			StringBuilder sb = new StringBuilder(string.Format(Constants.SCRIPT_ENDPOINT_URL, SyncanoClient.Instance.InstanceName, endpointId, scriptName));
-			//UnityWebRequest www = UnityWebRequest.Get(sb.ToString());
 
 			WWWForm postData = null;
 
@@ -272,7 +273,7 @@ namespace Syncano.Client {
 
 			yield return www.Send();
 
-			ScriptEndpoint response = JsonUtility.FromJson<ScriptEndpoint>(www.downloadHandler.text);
+			ScriptEndpoint response = JsonConvert.DeserializeObject<ScriptEndpoint>(www.downloadHandler.text); //JsonUtility.FromJson<ScriptEndpoint>(www.downloadHandler.text);
 			ReadWebRequest(response, www);
 
 			if(response.IsSuccess)

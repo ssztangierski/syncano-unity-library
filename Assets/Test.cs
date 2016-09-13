@@ -15,7 +15,7 @@ public class Test : MonoBehaviour {
 		//s.Please().Get<Question>(null);
 
 		//yield return s.Please().Get<Question>(onSuccessList, onFailureList);
-		//yield return s.Please().Get<Question>(60, onSuccess, onFailure);
+		//yield return s.Please().Get<Question>(300, onSuccess, onFailure);
 
 		/*
 		Channel c = new Channel ("test123");
@@ -29,13 +29,17 @@ public class Test : MonoBehaviour {
 		//channelConnection.Start(this, "syncano-io-channel");
 
 		/*
-		Dictionary<string, string> payload= new Dictionary<string, string>();
-		payload.Add("nickname", "test124");
+	
 
 
-		yield return s.Please().CallScriptEndpoint("a6a81f0951ec33026cf1426df598865f35ea9efb", "create_player", onSuccessCreatePlayer, payload);
+		
 		*/
 
+		Dictionary<string, string> payload= new Dictionary<string, string>();
+		payload.Add("nickname", "test124");
+		payload.Add("room", "238");
+
+		yield return s.Please().CallScriptEndpoint("2c86dc4e1820400e1e0cd1c3e2da34a5d6ee3e06", "join_room", onSuccessCreatePlayer, payload);
 
 		yield return null;
 	}
