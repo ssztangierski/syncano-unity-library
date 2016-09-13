@@ -231,7 +231,10 @@ namespace Syncano.Client {
 					response.SetData(json);
 				}
 
-				onSuccess.DynamicInvoke(response);
+				if(onSuccess != null)
+				{
+					onSuccess.DynamicInvoke(response);
+				}
 			}
 		}
 

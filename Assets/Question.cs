@@ -2,7 +2,6 @@
 using System.Collections;
 using Syncano;
 
-[System.Serializable]
 public class Question : SyncanoObject {
 
 	public string text;

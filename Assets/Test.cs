@@ -10,7 +10,7 @@ public class Test : MonoBehaviour {
 	IEnumerator Start()
 	{
 		//SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "syncano-io");
-		SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "confetti-io");
+		SyncanoClient s = SyncanoClient.Instance.Init("adfee89ec99b7022de16383185b299c29459e1fa", "unity-quiz-app");
 
 		//s.Please().Get<Question>(null);
 
@@ -29,17 +29,14 @@ public class Test : MonoBehaviour {
 		//channelConnection.Start(this, "syncano-io-channel");
 
 		/*
-	
 
-
-		
 		*/
 
 		Dictionary<string, string> payload= new Dictionary<string, string>();
 		payload.Add("nickname", "test124");
 		payload.Add("room", "238");
 
-		yield return s.Please().CallScriptEndpoint("2c86dc4e1820400e1e0cd1c3e2da34a5d6ee3e06", "join_room", onSuccessCreatePlayer, payload);
+		//yield return s.Please().CallScriptEndpoint("2c86dc4e1820400e1e0cd1c3e2da34a5d6ee3e06", "join_room", onSuccessCreatePlayer, payload);
 
 		yield return null;
 	}
@@ -47,8 +44,8 @@ public class Test : MonoBehaviour {
 	private void onSuccessList(ResponseGetList<Question> res)
 	{
 		Debug.Log("*** onSuccessList ***");
-		Debug.Log(res.objects.Count);
-		Debug.Log(res.objects[0].answers[0]);
+		Debug.Log(res.Objects.Count);
+		Debug.Log(res.Objects[0].answers[0]);
 		Debug.Log("*** onSuccessList ***");
 	}
 
