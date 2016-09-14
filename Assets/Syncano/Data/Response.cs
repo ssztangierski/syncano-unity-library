@@ -17,7 +17,7 @@ namespace Syncano.Data {
 
 		public virtual void SetData(string json)
 		{
-			Data = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling });
+			Data = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 		}
 }
 }

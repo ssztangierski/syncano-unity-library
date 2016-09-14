@@ -276,7 +276,7 @@ namespace Syncano.Client {
 
 			yield return www.Send();
 
-			ScriptEndpoint response = JsonConvert.DeserializeObject<ScriptEndpoint>(www.downloadHandler.text, new JsonSerializerSettings { NullValueHandling.Ignore });
+			ScriptEndpoint response = JsonConvert.DeserializeObject<ScriptEndpoint>(www.downloadHandler.text, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 			ReadWebRequest(response, www);
 
 			if(response.IsSuccess)
