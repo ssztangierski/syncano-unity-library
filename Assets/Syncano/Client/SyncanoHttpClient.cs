@@ -245,8 +245,8 @@ namespace Syncano.Client {
 		/// <param name="endpointId">Endpoint identifier.</param>
 		/// <param name="scriptName">Script name.</param>
 		/// <param name="callback">Callback.</param>
-		public Coroutine CallScriptEndpoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
-			return StartCoroutine(RequestScriptEndPoint(endpointId, scriptName, callback, payload));
+		public Coroutine RunScriptEndpointUrl(string url, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
+			return StartCoroutine(RequestScriptEndPoint(url, callback, payload));
 		}
 
 		/// <summary>
@@ -256,9 +256,12 @@ namespace Syncano.Client {
 		/// <param name="endpointId">Endpoint identifier.</param>
 		/// <param name="scriptName">Script name.</param>
 		/// <param name="callback">Callback.</param>
-		private IEnumerator RequestScriptEndPoint(string endpointId, string scriptName, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
+		private IEnumerator RequestScriptEndPoint(string url, System.Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
 
-			StringBuilder sb = new StringBuilder(string.Format(Constants.SCRIPT_ENDPOINT_URL, SyncanoClient.Instance.InstanceName, endpointId, scriptName));
+			if(Uri.IsWellFormedUriString(url, UriKind.Absolute) == false)
+			{
+				throw new Exception(url + " is not a valid url");
+			}
 
 			WWWForm postData = null;
 
@@ -272,7 +275,7 @@ namespace Syncano.Client {
 				}
 			}
 
-			UnityWebRequest www = UnityWebRequest.Post(sb.ToString(), postData);
+			UnityWebRequest www = UnityWebRequest.Post(url, postData);
 
 			yield return www.Send();
 

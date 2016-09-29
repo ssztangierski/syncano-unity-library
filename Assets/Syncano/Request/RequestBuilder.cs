@@ -115,24 +115,36 @@ namespace Syncano.Request {
 		/// <param name="onSuccess">On success.</param>
 		/// <param name="onFailure">On failure.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public Coroutine Delete<T>(T obj, Action<Response<T>> onSuccess, Action<Response<T>> onFailure) where T : SyncanoObject, new()  {
+		public Coroutine Delete<T>(T obj, Action<Response<T>> onSuccess, Action<Response<T>> onFailure) where T : SyncanoObject, new() {
 			CheckCallbacks<T>(onSuccess, onFailure);
 			return SyncanoHttpClient.Instance.PostAsync<T>(obj, onSuccess, onFailure, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
 		}
 
-		public Coroutine Delete<T>(T obj, Action<Response<T>> onResponseReturned) where T : SyncanoObject, new()  {
+		public Coroutine Delete<T>(T obj, Action<Response<T>> onResponseReturned) where T : SyncanoObject, new() {
 			return SyncanoHttpClient.Instance.PostAsync<T>(obj, onResponseReturned, null, UnityEngine.Networking.UnityWebRequest.kHttpVerbDELETE);
 		}
 
 		/// <summary>
-		/// Calls the script endpoint.
+		/// Runs the script endpoint URL.
 		/// </summary>
-		/// <returns>The script endpoint.</returns>
-		/// <param name="endpointId">Endpoint identifier.</param>
-		/// <param name="scriptName">Script name.</param>
+		/// <returns>The script endpoint URL.</returns>
+		/// <param name="url">URL.</param>
 		/// <param name="callback">Callback.</param>
-		public Coroutine CallScriptEndpoint(string endpointId, string scriptName, Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
-			return SyncanoHttpClient.Instance.CallScriptEndpoint(endpointId, scriptName, callback, payload);
+		/// <param name="payload">Payload.</param>
+		public Coroutine RunScriptEndpointUrl(string url, Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
+			return SyncanoHttpClient.Instance.RunScriptEndpointUrl(url, callback, payload);
+		}
+
+		/// <summary>
+		/// Runs the script endpoint URL with a given Id. To use this method you must provide an account key to your Syncano instance.
+		/// </summary>
+		/// <returns>The script endpoint URL.</returns>
+		/// <param name="scriptId">Script identifier.</param>
+		/// <param name="callback">Callback.</param>
+		/// <param name="payload">Payload.</param>
+		public Coroutine RunScriptEndpointUrl(int scriptId, Action<ScriptEndpoint> callback, Dictionary<string, string> payload = null) {
+			string url = string.Format(Constants.SCRIPT_WITH_ID_URL, SyncanoClient.Instance.InstanceName, scriptId);
+			return RunScriptEndpointUrl(url, callback, payload);
 		}
 
 		private void CheckCallbacks<T>(Delegate onSuccess, Delegate onFailure) where T : SyncanoObject, new()

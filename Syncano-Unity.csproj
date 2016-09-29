@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
     <ProjectGuid>{B6D2BDDF-097A-FB5B-8766-96917E617BBA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Syncano-Unity</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,7 +25,6 @@
     <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>Temp\bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -34,42 +33,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Syncano\ChannelConnection.cs" />
-     <Compile Include="Assets\Syncano\Client\SyncanoHttpClient.cs" />
-     <Compile Include="Assets\Syncano\Constants.cs" />
-     <Compile Include="Assets\Syncano\Data\Channel.cs" />
-     <Compile Include="Assets\Syncano\Data\Notification.cs" />
-     <Compile Include="Assets\Syncano\Data\Response.cs" />
-     <Compile Include="Assets\Syncano\Data\ResponseGetList.cs" />
-     <Compile Include="Assets\Syncano\Data\ScriptEndpoint.cs" />
-     <Compile Include="Assets\Syncano\Enum\ChannelPermissions.cs" />
-     <Compile Include="Assets\Syncano\Enum\ChannelType.cs" />
-     <Compile Include="Assets\Syncano\Request\RequestBuilder.cs" />
-     <Compile Include="Assets\Syncano\Request\SyncanoWebRequest.cs" />
-     <Compile Include="Assets\Syncano\SelfInstantiatingSingleton.cs" />
-     <Compile Include="Assets\Syncano\Syncano.cs" />
-     <Compile Include="Assets\Syncano\SyncanoObject.cs" />
-     <Compile Include="Assets\Test.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>E:/Projects/syncano-unity-library/Assets/External/Newtonsoft.Json.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\Syncano\ChannelConnection.cs" />
+    <Compile Include="Assets\Syncano\Client\SyncanoHttpClient.cs" />
+    <Compile Include="Assets\Syncano\Constants.cs" />
+    <Compile Include="Assets\Syncano\Data\Channel.cs" />
+    <Compile Include="Assets\Syncano\Data\Notification.cs" />
+    <Compile Include="Assets\Syncano\Data\Response.cs" />
+    <Compile Include="Assets\Syncano\Data\ResponseGetList.cs" />
+    <Compile Include="Assets\Syncano\Data\ScriptEndpoint.cs" />
+    <Compile Include="Assets\Syncano\Enum\ChannelPermissions.cs" />
+    <Compile Include="Assets\Syncano\Enum\ChannelType.cs" />
+    <Compile Include="Assets\Syncano\Request\RequestBuilder.cs" />
+    <Compile Include="Assets\Syncano\Request\SyncanoWebRequest.cs" />
+    <Compile Include="Assets\Syncano\SelfInstantiatingSingleton.cs" />
+    <Compile Include="Assets\Syncano\Syncano.cs" />
+    <Compile Include="Assets\Syncano\SyncanoObject.cs" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>E:\Projects\syncano-unity-library\Assets\External\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -79,5 +67,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>
