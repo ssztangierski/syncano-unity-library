@@ -1,8 +1,11 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
+﻿<Properties StartupItem="Syncano-Unity.csproj" RefactoringSettings.EnableRefactorings="True">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Syncano\SyncanoObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Syncano\Client\SyncanoHttpClient.cs">
     <Files>
-      <File FileName="Assets\Syncano\SyncanoObject.cs" Line="16" Column="12" />
+      <File FileName="Assets\Syncano\Request\RequestBuilder.cs" Line="146" Column="1" />
+      <File FileName="Assets\Syncano\Client\SyncanoHttpClient.cs" Line="248" Column="40" />
+      <File FileName="Assets\Syncano\Constants.cs" Line="22" Column="40" />
+      <File FileName="Assets\Syncano\Data\Response.cs" Line="22" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
