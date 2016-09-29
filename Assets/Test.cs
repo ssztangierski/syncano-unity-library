@@ -57,7 +57,7 @@ public class Test : MonoBehaviour {
 			Debug.Log(res.webError);
 	}
 
-	private void onNotification(Response<Notification> response) { Debug.Log("received " + response.Data.payload); }
+	private void onNotification(Response<Notification> response) { Debug.Log("received " + response.Data.Result.Content); }
 
 	private void onError(Response<Notification> response) { Debug.Log("received " + response.ToString()); }
 
